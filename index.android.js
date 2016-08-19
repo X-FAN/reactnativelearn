@@ -1,60 +1,30 @@
 import React, {
-  Component
+    Component
 }
-from 'react';
+    from 'react';
 import {
-  AppRegistry,
-  Text,
-  ActivityIndicator,
-  StyleSheet,
-  View,
-  TextInput,
-  TouchableNativeFeedback,
+    AppRegistry,
+    Navigator
 }
-from 'react-native';
+    from 'react-native';
 
-let userName;
-let password;
-class LoginComponet extends Component {
-  render() {
-    return ( < View style = {
-        {
-          margin: 10,
-          flex: 1,
-          flexDirection: 'column'
-        }
+import LoginComponet from './LoginComponet'
 
-      } >
-
-      < TextInput style = {textInputStyles.basic }
-      placeholderTextColor = '#757575'
-      placeholder = '请输入账号' / >
-
-      < TextInput style = {textInputStyles.basic}
-      placeholderTextColor = '#757575'
-      placeholder = '请输入密码' / >
-
-      < TouchableNativeFeedback onPress = {this._onPressButton} background = {TouchableNativeFeedback.SelectableBackground()} >
-      < View style = {{ borderRadius: 10, backgroundColor: '#B2EBF2'} } >
-      < Text style={{margin:10,textAlign:'center'}}> 登录 < /Text> 
-
-      < /View>     
-      < /TouchableNativeFeedback>
-
-      < /View > );
-    }
-  }
-
-  class AwesomeProject extends Component {
+class AwesomeProject extends Component {
     render() {
-      return ( < LoginComponet / > );
+        let defaultName = 'LoginComponet';
+        let defaultComponent = LoginComponet;
+        return (
+            <Navigator
+                initialRoute={{name: defaultName, component: defaultComponent}}
+                configureScene={(route) => {
+                    return Navigator.SceneConfigs.VerticalDownSwipeJump;
+                }}
+                renderScene={(route, navigator) => {
+                    let Component = route.component;
+                    return <Component {...route.params} navigator={navigator}/>
+                }}/>
+        );
     }
-  }
-
-  const textInputStyles = StyleSheet.create({
-    basic: {
-      padding: 10
-    },
-
-  });
-  AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+}
+AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
