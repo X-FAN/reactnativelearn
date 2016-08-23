@@ -13,7 +13,7 @@ import {
     Navigator
 } from 'react-native'
 
-import SecondPageComponent from './SecondPageComponent'
+import SecondPageComponent from './AndroidComponent'
 
 class LoginComponet extends Component {
     check(username, password) {
@@ -34,13 +34,13 @@ class LoginComponet extends Component {
         let password = '';
         return (
             <View style={{margin: 10, flex: 1, flexDirection: 'column'}}>
-                <TextInput style={textInputStyles.basic}
+                <TextInput style={[styles.basic, {marginTop: 30}] }
                            placeholderTextColor='#757575'
                            placeholder='请输入账号'
                            onChangeText={(text)=> {
                                username = text
                            }}/>
-                <TextInput style={textInputStyles.basic}
+                <TextInput style={styles.basic}
                            placeholderTextColor='#757575'
                            placeholder='请输入密码'
                            onChangeText={(text)=> {
@@ -50,8 +50,8 @@ class LoginComponet extends Component {
                     background={TouchableNativeFeedback.SelectableBackground()}
                     onPress={()=>this.check(username, password)}
                 >
-                    <View style={{borderRadius: 10, backgroundColor: '#B2EBF2'}}>
-                        <Text style={{margin: 10, textAlign: 'center'}}>登录</Text>
+                    <View style={{borderRadius: 10, backgroundColor: '#0097A7', marginTop: 30}}>
+                        <Text style={styles.text}>登录</Text>
                     </View>
                 </TouchableNativeFeedback>
             </View>
@@ -59,10 +59,16 @@ class LoginComponet extends Component {
     }
 }
 
-const textInputStyles = StyleSheet.create({
+const styles = StyleSheet.create({
     basic: {
         padding: 10
     },
+    text: {
+        fontSize: 18,
+        color: '#FFFFFF',
+        margin: 10,
+        textAlign: 'center'
+    }
 });
 
 export default  LoginComponet;
