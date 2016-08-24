@@ -8,14 +8,21 @@ import {
     StyleSheet,
     TouchableNativeFeedback,
     Text,
-    ToastAndroid,
     TouchableHighlight,
     Navigator
 } from 'react-native'
 
-import SecondPageComponent from './AndroidComponent'
+import AndroidGankComponent from './AndroidGankComponent'
 
 class LoginComponet extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: '',
+        };
+    }
+
     check(username, password) {
         if (username.length == 0) {
             ToastAndroid.show('请填写账号', ToastAndroid.LONG)
@@ -23,32 +30,30 @@ class LoginComponet extends Component {
             ToastAndroid.show('请填写密码', ToastAndroid.LONG);
         } else {
             this.props.navigator.push({
-                name: 'SecondPageComponent',
-                component: SecondPageComponent,
+                name: 'AndroidGankComponent',
+                component: AndroidGankComponent,
             })
         }
     }
 
     render() {
-        let username = '';
-        let password = '';
         return (
             <View style={{margin: 10, flex: 1, flexDirection: 'column'}}>
                 <TextInput style={[styles.basic, {marginTop: 30}] }
                            placeholderTextColor='#757575'
                            placeholder='请输入账号'
                            onChangeText={(text)=> {
-                               username = text
+                               this.setState({username: text});
                            }}/>
                 <TextInput style={styles.basic}
                            placeholderTextColor='#757575'
                            placeholder='请输入密码'
                            onChangeText={(text)=> {
-                               password = text
+                               this.setState({password: text});
                            }}/>
                 <TouchableNativeFeedback
                     background={TouchableNativeFeedback.SelectableBackground()}
-                    onPress={()=>this.check(username, password)}
+                    onPress={()=>this.check(this.state.username, this.state.password)}
                 >
                     <View style={{borderRadius: 10, backgroundColor: '#0097A7', marginTop: 30}}>
                         <Text style={styles.text}>登录</Text>
@@ -59,6 +64,9 @@ class LoginComponet extends Component {
     }
 }
 
+/**
+ * 样式封装
+ */
 const styles = StyleSheet.create({
     basic: {
         padding: 10

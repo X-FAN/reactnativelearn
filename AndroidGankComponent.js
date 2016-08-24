@@ -13,11 +13,12 @@ import {
     TouchableWithoutFeedback,
     ActivityIndicator,
     RefreshControl
-} from  'react-native'
+} from  'react-native';
+import WebViewComponet from './WebViewComponet';
 
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-class SecondPageComponent extends Component {
+class AndroidGankComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +34,7 @@ class SecondPageComponent extends Component {
 
 
     render() {
-        if (this.state.dataSource.getRowCount() === 0) {//没有数据时展示加载
+        if (this.state.dataSource.getRowCount() === 0) {//没有数据时展示'加载视图'
             return (
                 <View style={ {flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                     <ActivityIndicator
@@ -83,11 +84,25 @@ class SecondPageComponent extends Component {
      */
     getRow(rowData) {
         return (
-            <View style={styles.container}>
-                <Text style={styles.text}>{'标题:' + rowData.desc}</Text>
-                <Text style={styles.subText}>{'推荐人:' + rowData.who}</Text>
-            </View>
+            <TouchableWithoutFeedback onPress={()=>this.jumpToGank(rowData.url)}>
+                <View style={styles.container}>
+                    <Text style={styles.text}>{'标题:' + rowData.desc}</Text>
+                    <Text style={styles.subText}>{'推荐人:' + rowData.who}</Text>
+                </View>
+            </TouchableWithoutFeedback>
         )
+    }
+
+    /**
+     * 展示具体干货内容
+     * @param url
+     */
+    jumpToGank(url) {
+        this.props.navigator.push({
+            url: url,
+            name: 'WebViewComponet',
+            component: WebViewComponet
+        });
     }
 
     /**
@@ -146,5 +161,5 @@ const styles = StyleSheet.create({
         color: '#757575'
     }
 });
-export  default SecondPageComponent;
+export  default AndroidGankComponent;
 

@@ -4,7 +4,8 @@ import React, {
     from 'react';
 import {
     AppRegistry,
-    Navigator
+    Navigator,
+    ToastAndroid
 }
     from 'react-native';
 
@@ -17,13 +18,15 @@ class AwesomeProject extends Component {
         return (
             <Navigator
                 initialRoute={{name: defaultName, component: defaultComponent}}
-                configureScene={(route) => {
-                    return Navigator.SceneConfigs.HorizontalSwipeJump;
+                configureScene={(route) => {//定义跳转的方式,禁用手势拖动跳转
+                    return {...Navigator.SceneConfigs.FadeAndroid, gestures: false};
                 }}
                 renderScene={(route, navigator) => {
                     let Component = route.component;
-                    return <Component {...route.params} navigator={navigator}/>
+                    //路由的参数和navigator都传入到跳转的component内
+                    return <Component {...route} navigator={navigator}/>
                 }}/>
+            //{...route} 将route的每个属性都传过去
         );
     }
 }
