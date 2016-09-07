@@ -18,7 +18,7 @@ import WebViewComponet from './WebViewComponet';
 
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-class AndroidGankComponent extends Component {
+class GankComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,7 +27,7 @@ class AndroidGankComponent extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.genRows();
         BackAndroid.addEventListener('hardwareBackPress', ()=>this.goBack());//监听安卓回退按钮
     }
@@ -44,14 +44,7 @@ class AndroidGankComponent extends Component {
             );
         } else {
             return (
-                //标题栏
                 <View style={{flexDirection: 'column', flex: 1}}>
-                    <View style={{flexDirection: 'row', backgroundColor: '#00BCD4', padding: 10}}>
-                        <TouchableWithoutFeedback onPress={()=>this.goBack()}>
-                            <Image style={{width: 30, height: 30}} source={require('./image/back.png') }/>
-                        </TouchableWithoutFeedback>
-                        <Text style={{fontSize: 20, color: "#FFFFFF"}}>安卓干货</Text>
-                    </View>
                     <ListView
                         dataSource={this.state.dataSource}
                         renderRow={(rowData)=>this.getRow(rowData)}
@@ -98,18 +91,21 @@ class AndroidGankComponent extends Component {
      * @param url
      */
     jumpToGank(url) {
-        this.props.navigator.push({
-            url: url,
-            name: 'WebViewComponet',
-            component: WebViewComponet
-        });
+        if (this.props.navigator) {
+            this.props.navigator.push({
+                url: url,
+                name: 'WebViewComponet',
+                component: WebViewComponet
+            });
+        }
     }
 
     /**
      * 网络请求获取安卓干货
      */
     getAndroidGank() {
-        fetch('http://gank.io/api/data/Android/10/1')
+        ToastAndroid.show(this.props.url, ToastAndroid.SHORT);
+        fetch(this.props.url)
             .then((response)=> {
                 return response.json();
             })
@@ -127,7 +123,7 @@ class AndroidGankComponent extends Component {
     goBack() {
         const nav = this.props.navigator;
         const routers = nav.getCurrentRoutes();
-        if (routers.length > 1) {
+        if (routers.length > 1 && nav) {
             nav.pop();
             return true;
         }
@@ -161,5 +157,5 @@ const styles = StyleSheet.create({
         color: '#757575'
     }
 });
-export  default AndroidGankComponent;
+export  default GankComponent;
 

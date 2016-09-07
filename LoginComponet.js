@@ -9,10 +9,11 @@ import {
     TouchableNativeFeedback,
     Text,
     TouchableHighlight,
-    Navigator
+    Navigator,
+    ToastAndroid
 } from 'react-native'
 
-import AndroidGankComponent from './AndroidGankComponent'
+import GankShowComponent from './GankShowComponent'
 
 class LoginComponet extends Component {
     constructor(props) {
@@ -29,10 +30,12 @@ class LoginComponet extends Component {
         } else if (password.length == 0) {
             ToastAndroid.show('请填写密码', ToastAndroid.LONG);
         } else {
-            this.props.navigator.push({
-                name: 'AndroidGankComponent',
-                component: AndroidGankComponent,
-            })
+            if (this.props.navigator) {
+                this.props.navigator.push({
+                    name: 'GankShowComponent',
+                    component: GankShowComponent,
+                })
+            }
         }
     }
 
