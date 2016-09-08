@@ -12,7 +12,8 @@ import {
     TouchableHighlight,
     TouchableWithoutFeedback,
     ActivityIndicator,
-    RefreshControl
+    RefreshControl,
+    TouchableNativeFeedback
 } from  'react-native';
 import WebViewComponet from './WebViewComponet';
 
@@ -77,12 +78,13 @@ class GankComponent extends Component {
      */
     getRow(rowData) {
         return (
-            <TouchableWithoutFeedback onPress={()=>this.jumpToGank(rowData.url)}>
+            <TouchableNativeFeedback background={TouchableNativeFeedback.SelectableBackground()}
+                                     onPress={()=>this.jumpToGank(rowData.url)}>
                 <View style={styles.container}>
                     <Text style={styles.text}>{'标题:' + rowData.desc}</Text>
                     <Text style={styles.subText}>{'推荐人:' + rowData.who}</Text>
                 </View>
-            </TouchableWithoutFeedback>
+            </TouchableNativeFeedback>
         )
     }
 
@@ -104,7 +106,6 @@ class GankComponent extends Component {
      * 网络请求获取安卓干货
      */
     getAndroidGank() {
-        ToastAndroid.show(this.props.url, ToastAndroid.SHORT);
         fetch(this.props.url)
             .then((response)=> {
                 return response.json();

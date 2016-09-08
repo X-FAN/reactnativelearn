@@ -11,15 +11,14 @@ import GankComponent from './GankComponent'
 class GankShowComponent extends Component {
     render() {
         return (
-            <ScrollableTabView>
-                <GankComponent navigator={this.props.navigator} url='http://gank.io/api/data/all/10/1' tabLabel='ALL'
-                               tabBarActiveTextColor='#0097A7'/>
+            <ScrollableTabView tabBarUnderlineStyle={{backgroundColor: '#0097A7'}} tabBarActiveTextColor='#0097A7'>
+                <GankComponent navigator={this.props.navigator} url='http://gank.io/api/data/all/10/1' tabLabel='ALL'/>
                 <GankComponent navigator={this.props.navigator} url='http://gank.io/api/data/Android/10/1'
-                               tabLabel='ANDROID' tabBarActiveTextColor='#0097A7'/>
-                <GankComponent navigator={this.props.navigator} url='http://gank.io/api/data/iOS/10/1' tabLabel='IOS'
-                               tabBarActiveTextColor='#0097A7'/>
+                               tabLabel='ANDROID'/>
+                <GankComponent navigator={this.props.navigator} url='http://gank.io/api/data/iOS/10/1' tabLabel='IOS'/>
             </ScrollableTabView>
         );
+
     }
 }
 
