@@ -5,10 +5,16 @@ import  React, {
     Component,
 
 } from 'react'
+import  {BackAndroid} from 'react-native'
 import ScrollableTabView  from 'react-native-scrollable-tab-view'
 import GankComponent from './GankComponent'
 
 class GankShowComponent extends Component {
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', ()=>this.goBack());//监听安卓回退按钮
+    }
+
     render() {
         return (
             <ScrollableTabView tabBarUnderlineStyle={{backgroundColor: '#0097A7'}} tabBarActiveTextColor='#0097A7'>
@@ -20,6 +26,20 @@ class GankShowComponent extends Component {
         );
 
     }
+
+    /**
+     * 回退
+     */
+    goBack() {
+        const nav = this.props.navigator;
+        const routers = nav.getCurrentRoutes();
+        if (routers.length > 1 && nav) {
+            nav.pop();
+            return true;
+        }
+        return false;
+    }
+
 }
 
 export default  GankShowComponent;

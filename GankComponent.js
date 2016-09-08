@@ -1,6 +1,8 @@
 import  React, {
     Component
 } from 'react'
+
+
 import {
     View,
     Text,
@@ -30,9 +32,7 @@ class GankComponent extends Component {
 
     componentDidMount() {
         this.genRows();
-        BackAndroid.addEventListener('hardwareBackPress', ()=>this.goBack());//监听安卓回退按钮
     }
-
 
     render() {
         if (this.state.dataSource.getRowCount() === 0) {//没有数据时展示'加载视图'
@@ -116,19 +116,6 @@ class GankComponent extends Component {
                 }
             }).catch((error)=>console.error(error))
             .done();
-    }
-
-    /**
-     * 回退
-     */
-    goBack() {
-        const nav = this.props.navigator;
-        const routers = nav.getCurrentRoutes();
-        if (routers.length > 1 && nav) {
-            nav.pop();
-            return true;
-        }
-        return false;
     }
 
     /**
