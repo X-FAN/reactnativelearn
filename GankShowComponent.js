@@ -8,6 +8,7 @@ import  React, {
 import  {BackAndroid} from 'react-native'
 import ScrollableTabView  from 'react-native-scrollable-tab-view'
 import GankComponent from './GankComponent'
+import GirlComponent from './GirlComponent'
 
 class GankShowComponent extends Component {
 
@@ -22,6 +23,7 @@ class GankShowComponent extends Component {
                 <GankComponent navigator={this.props.navigator} url='http://gank.io/api/data/Android/10/1'
                                tabLabel='ANDROID'/>
                 <GankComponent navigator={this.props.navigator} url='http://gank.io/api/data/iOS/10/1' tabLabel='IOS'/>
+                <GirlComponent navigator={this.props.navigator} url='http://gank.io/api/data/福利/10/1' tabLabel='福利'/>
             </ScrollableTabView>
         );
 
