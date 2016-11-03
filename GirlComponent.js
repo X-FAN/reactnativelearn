@@ -22,15 +22,15 @@ class GirlComponent extends Component {
         }
     }
 
-    componentDidMount() {
-        fetch('http://gank.io/api/data/福利/1/1')
+    componentWillMount() {
+        fetch('http://gank.io/api/data/福利/10/1')
             .then((response)=> {
                 return response.json();
             })
             .then((responseJson)=> {
                 if (responseJson.results) {
-                    ToastAndroid.show(responseJson.results[0].url, ToastAndroid.SHORT);
-                    this.setState({imgUrl: responseJson.results[0].url});
+                    var index = Math.ceil(Math.random() * 10 - 1);
+                    this.setState({imgUrl: responseJson.results[index].url});
                 }
             }).catch((error)=>console.error(error))
             .done();
