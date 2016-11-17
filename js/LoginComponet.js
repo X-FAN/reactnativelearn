@@ -12,16 +12,21 @@ import {
     Navigator,
     ToastAndroid
 } from 'react-native'
+import SplashScreen from './SplashScreen'
 
 import GankShowComponent from './GankShowComponent'
 
-class LoginComponet extends Component {
+class LoginComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
             password: '',
         };
+    }
+
+    componentDidMount() {
+        SplashScreen.hide();
     }
 
     check(username, password) {
@@ -45,18 +50,18 @@ class LoginComponet extends Component {
                 <TextInput style={[styles.basic, {marginTop: 30}] }
                            placeholderTextColor='#757575'
                            placeholder='请输入账号'
-                           onChangeText={(text)=> {
+                           onChangeText={(text) => {
                                this.setState({username: text});
                            }}/>
                 <TextInput style={styles.basic}
                            placeholderTextColor='#757575'
                            placeholder='请输入密码'
-                           onChangeText={(text)=> {
+                           onChangeText={(text) => {
                                this.setState({password: text});
                            }}/>
                 <TouchableNativeFeedback
                     background={TouchableNativeFeedback.SelectableBackground()}
-                    onPress={()=>this.check(this.state.username, this.state.password)}
+                    onPress={() => this.check(this.state.username, this.state.password)}
                 >
                     <View style={{borderRadius: 10, backgroundColor: '#0097A7', marginTop: 30}}>
                         <Text style={styles.text}>登录</Text>
@@ -82,4 +87,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default  LoginComponet;
+export default  LoginComponent;

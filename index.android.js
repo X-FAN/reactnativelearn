@@ -9,12 +9,12 @@ import {
 }
     from 'react-native';
 
-import LoginComponet from './LoginComponet'
+import GankShowComponent from './js/GankShowComponent'
 
 class AwesomeProject extends Component {
     render() {
-        let defaultName = 'LoginComponet';
-        let defaultComponent = LoginComponet;
+        let defaultName = 'GankShowComponent';
+        let defaultComponent = GankShowComponent;
         return (
             <Navigator
                 initialRoute={{name: defaultName, component: defaultComponent}}

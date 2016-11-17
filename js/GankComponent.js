@@ -38,22 +38,21 @@ class GankComponent extends Component {
         if (this.state.dataSource.getRowCount() === 0) {//没有数据时展示'加载视图'
             return (
                 <View style={ {flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                    <ActivityIndicator
-                        size='large'
-                        color='#8BC34A'/>
+                    <ActivityIndicator size='large' color='#00BCD4'/>
                 </View>
-            );
+            )
+                ;
         } else {
             return (
-                <View style={{flexDirection: 'column', flex: 1}}>
+                <View style={{flexDirection: 'column', flex: 1, backgroundColor: '#eff3f7'} }>
                     <ListView
                         dataSource={this.state.dataSource}
-                        renderRow={(rowData)=>this.getRow(rowData)}
+                        renderRow={(rowData) => this.getRow(rowData)}
                         refreshControl={//下拉刷新的配置
                             <RefreshControl
                                 refreshing={this.state.isRefreshing}
-                                onRefresh={()=>this.onRefresh}
-                                colors={['#8BC34A']}
+                                onRefresh={() => this.onRefresh}
+                                colors={['#00BCD4']}
                                 progressBackgroundColor="#ffffff"
                             />
                         }>
@@ -79,7 +78,7 @@ class GankComponent extends Component {
     getRow(rowData) {
         return (
             <TouchableNativeFeedback background={TouchableNativeFeedback.SelectableBackground()}
-                                     onPress={()=>this.jumpToGank(rowData.url)}>
+                                     onPress={() => this.jumpToGank(rowData.url)}>
                 <View style={styles.container}>
                     <Text style={styles.text}>{'标题:' + rowData.desc}</Text>
                     <Text style={styles.subText}>{'推荐人:' + rowData.who}</Text>
@@ -107,14 +106,14 @@ class GankComponent extends Component {
      */
     getAndroidGank() {
         fetch(this.props.url)
-            .then((response)=> {
+            .then((response) => {
                 return response.json();
             })
-            .then((responseJson)=> {
+            .then((responseJson) => {
                 if (responseJson.results) {
                     this.setState({isRefreshing: false, dataSource: ds.cloneWithRows(responseJson.results)});
                 }
-            }).catch((error)=>console.error(error))
+            }).catch((error) => console.error(error))
             .done();
     }
 
@@ -133,16 +132,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 10,
         margin: 10,
-        backgroundColor: '#B2EBF2',
+        backgroundColor: '#ffffff',
         borderRadius: 5
     },
     text: {
-        fontSize: 18,
+        fontSize: 14,
         color: '#212121'
     },
     subText: {
-        fontSize: 18,
-        color: '#757575'
+        marginTop: 5,
+        fontSize: 14,
+        color: '#212121'
     }
 });
 export  default GankComponent;

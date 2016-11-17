@@ -9,16 +9,25 @@ import  {BackAndroid} from 'react-native'
 import ScrollableTabView  from 'react-native-scrollable-tab-view'
 import GankComponent from './GankComponent'
 import GirlComponent from './GirlComponent'
-
+import SplashScreen from './SplashScreen'
 class GankShowComponent extends Component {
 
     componentDidMount() {
-        BackAndroid.addEventListener('hardwareBackPress', ()=>this.goBack());//监听安卓回退按钮
+        SplashScreen.hide();//隐藏欢迎页
+        BackAndroid.addEventListener('hardwareBackPress', () => this.goBack());//监听安卓回退按钮
     }
 
     render() {
         return (
-            <ScrollableTabView tabBarUnderlineStyle={{backgroundColor: '#0097A7'}} tabBarActiveTextColor='#0097A7'>
+            <ScrollableTabView tabBarUnderlineStyle={{
+                position: 'absolute',
+                height: 3,
+                backgroundColor: '#ffffff',
+                bottom: 0,
+            }}
+                               tabBarTextStyle={{fontSize: 14}}
+                               tabBarActiveTextColor='#ffffff'
+                               tabBarBackgroundColor='#00BCD4' tabBarInactiveTextColor="#212121">
                 <GankComponent navigator={this.props.navigator} url='http://gank.io/api/data/all/10/1' tabLabel='ALL'/>
                 <GankComponent navigator={this.props.navigator} url='http://gank.io/api/data/Android/10/1'
                                tabLabel='ANDROID'/>

@@ -21,7 +21,7 @@ class WebViewComponet extends Component {
             <View style={{flexDirection: 'column', flex: 1}}>
                 <View style={{flexDirection: 'row', backgroundColor: '#00BCD4', padding: 10}}>
                     <TouchableWithoutFeedback onPress={()=>this.goBack()}>
-                        <Image style={{width: 30, height: 30}} source={require('./image/back.png') }/>
+                        <Image style={{width: 30, height: 30}} source={require('./../image/back.png') }/>
                     </TouchableWithoutFeedback>
                     <Text style={{fontSize: 20, color: "#FFFFFF"}}>安卓干货</Text>
                 </View>
