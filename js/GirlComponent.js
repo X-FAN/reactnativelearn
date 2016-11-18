@@ -16,7 +16,6 @@ import {
 }
     from  'react-native'
 import  PixelRatio from "react-native/Libraries/Utilities/PixelRatio";
-
 class GirlComponent extends Component {
     constructor(props) {
         super(props);
@@ -25,14 +24,24 @@ class GirlComponent extends Component {
         }
     }
 
+    loadImage() {
+        this.setState({imgUrl: ''});
+        this.getImage();
+    }
+
+
     componentWillMount() {
+        this.getImage();
+    }
+
+    getImage() {
         fetch('http://gank.io/api/data/福利/100/1')
             .then((response) => {
                 return response.json();
             })
             .then((responseJson) => {
                 if (responseJson.results) {
-                    var index = Math.ceil(Math.random() * 100 - 1);
+                    let index = Math.ceil(Math.random() * 100 - 1);//随机取一张福利图
                     this.setState({imgUrl: responseJson.results[index].url});
                 }
             }).catch((error) => console.error(error))
