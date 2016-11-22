@@ -8,7 +8,7 @@ import GankComponent from "./GankComponent";
 import GirlComponent from "./GirlComponent";
 import SplashScreen from "./SplashScreen";
 
-var isFirst = true;
+let isFirst = true;
 class GankShowComponent extends Component {
 
     componentDidMount() {
@@ -17,7 +17,7 @@ class GankShowComponent extends Component {
     }
 
     render() {
-        var navigationView = (
+        const navigationView = (
             <View style={{flex: 1, backgroundColor: '#eff3f7'}}>
                 <View style={styles.head}>
                     <Image style={{

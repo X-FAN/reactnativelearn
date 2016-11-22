@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 
-class WebViewComponet extends Component {
+class WebViewComponent extends Component {
 
     render() {
         return (
@@ -62,4 +62,4 @@ class WebViewComponet extends Component {
         return false;
     }
 }
-export  default  WebViewComponet;
+export  default  WebViewComponent;

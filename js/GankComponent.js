@@ -20,7 +20,7 @@ import {
 import WebViewComponet from './WebViewComponet';
 
 
-var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 class GankComponent extends Component {
     constructor(props) {
         super(props);
